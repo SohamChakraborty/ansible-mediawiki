@@ -1,0 +1,30 @@
+---
+
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Configure httpd
+      lineinfile:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^DocumentRoot '
+        line: DocumentRoot /var/www
+
+    - name: Again configure
+      blockinfile:
+        path: /etc/httpd/conf/httpd.conf
+        backup: yes
+        insertafter: "DocumentRoot /var/www"
+        marker: "# {mark} ANSIBLE MANAGED BLOCK {mark} #"
+        block: |
+          <Directory "/var/www"> 
+                DirectoryIndex index.html index.html.var index.php
+          </Directory>
+      notify: Restart httpd
+
+  handlers:
+    - name: Restart httpd
+      systemd:
+        name: httpd
+        state: restarted
+        enabled: yes

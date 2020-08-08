@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: yes
+
+  tasks:
+    - name: Gather all mysql information
+      mysql_info:
+        login_user: root
+      register: mysql_info
+        #login_password: wiki
+        #        login_unix_socket: /path/to/mysqld/socket
+
+    - name: Create an user for mediawiki
+      mysql_user:
+        name: wiki
+        password: 
+        encrypted: yes
+        priv: '*.*:ALL'
+        state: present
+
+    - name: Dump the info
+      debug:
+        var: mysql_info
+

@@ -1,0 +1,22 @@
+#mysql_root_password: super-secure-password
+overwrite_global_mycnf: no
+mysql_databases:
+  - name: wikidatabase
+    encoding: latin1
+    collation: latin1_general_ci
+mysql_users:
+  - name: wiki
+    host: "%"
+    password:  !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          39343834633261393537646561646639333530333432623038643430376430653635353431306564
+          3163663538373839616665656333633434656663346633380a336262303032643438316264313461
+          33323131393334346535643133323064356333613831643636363334303361613439383365393737
+          6533613231666432340a633330303837373538333533343635336238316466613232363066323032
+          3164
+    priv: "wikidatabase.*:ALL"
+mysql_innodb_log_file_size: 5242880
+
+#TASK [geerlingguy.mysql : Copy my.cnf global MySQL configuration.] 
+#changed: [35.177.146.186]
+

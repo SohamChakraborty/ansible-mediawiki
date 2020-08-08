@@ -1,0 +1,11 @@
+---
+- hosts:
+    - all
+  become: yes
+  gather_facts: false
+
+  tasks:
+  - name: Enable EPEL
+    yum:
+      name: epel-release
+      state: present

@@ -1,0 +1,4 @@
+# MySQL role
+- src: https://github.com/geerlingguy/ansible-role-mysql/
+  version: 3.3.0
+  name: geerlingguy.mysql
