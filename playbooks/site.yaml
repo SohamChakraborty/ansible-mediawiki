@@ -1,0 +1,6 @@
+---
+
+- import_playbook: enable_epel.yaml
+- import_playbook: mariadb.yaml
+- import_playbook: configure_apache.yaml
+
