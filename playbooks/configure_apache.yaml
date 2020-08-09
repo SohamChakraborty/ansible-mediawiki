@@ -4,13 +4,13 @@
   become: yes
 
   tasks:
-    - name: Configure httpd
+    - name: Change DocumentRoot from /var/www/html to /var/www
       lineinfile:
         path: /etc/httpd/conf/httpd.conf
         regexp: '^DocumentRoot '
         line: DocumentRoot /var/www
 
-    - name: Again configure
+    - name: Add DirectoryIndex for mediawiki
       blockinfile:
         path: /etc/httpd/conf/httpd.conf
         backup: yes
